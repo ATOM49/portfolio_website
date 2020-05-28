@@ -1,20 +1,13 @@
-/** TodoMVC model definitions **/
+/** ProjectMVC model definitions **/
+import { CompanyModel } from './CompanyModel';
 
 export interface ProjectModel {
-  id: string;
+  _id: string;
   image: string;
   title: string;
   content: string;
   startDate: string;
   endDate: string;
   primaryFunction: string;
-  associatedCompany: string;
-}
-
-export namespace ProjectModel {
-  export enum Filter {
-    SHOW_ALL = 'all',
-    SHOW_ACTIVE = 'active',
-    SHOW_COMPLETED = 'completed'
-  }
+  associatedCompany: CompanyModel;
 }

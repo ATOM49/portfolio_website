@@ -1,25 +1,39 @@
 import React from 'react';
-import { TodoTextInput } from '../TodoTextInput';
-import { TodoActions } from 'app/actions/todos';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
+import { useStyles } from './style';
+import { Link as RouterLink } from 'react-router-dom';
 
 export namespace Header {
-  export interface Props {
-    addTodo: typeof TodoActions.addTodo;
-  }
+  export interface Props {}
 }
 
-export const Header = ({ addTodo }: Header.Props): JSX.Element => {
-  const handleSave = React.useCallback(
-    (text: string) => {
-      if (text.length) addTodo({ text });
-    },
-    [addTodo]
-  );
+export const Header = ({}: Header.Props): JSX.Element => {
+  const classes = useStyles();
 
   return (
-    <header>
-      <h1>Todos</h1>
-      <TodoTextInput newTodo onSave={handleSave} placeholder="What needs to be done?" />
-    </header>
+    <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
+      <Toolbar className={classes.toolbar}>
+        <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
+          <Link component={RouterLink} to="/">
+            Abhilash Mirji
+          </Link>
+        </Typography>
+        <nav>
+          <Link variant="button" color="textPrimary" component={RouterLink} to="/projects" className={classes.link}>
+            Projects
+          </Link>
+          <Link variant="button" color="textPrimary" href="#" className={classes.link}>
+            Gallery
+          </Link>
+        </nav>
+        <Button href="#" color="primary" variant="outlined" className={classes.link}>
+          Login
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 };

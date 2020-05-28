@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTodoActions } from 'app/actions';
 import { RootState } from 'app/reducers';
 import { TodoModel } from 'app/models';
-import { Header, TodoList, Footer } from 'app/components';
+import { TodoList, Footer } from 'app/components';
 
 const FILTER_VALUES = (Object.keys(TodoModel.Filter) as (keyof typeof TodoModel.Filter)[]).map(
   (key) => TodoModel.Filter[key]
@@ -49,7 +49,7 @@ export const App = ({ history, location }: App.Props) => {
 
   return (
     <div className={style.normal}>
-      <Header addTodo={todoActions.addTodo} />
+      {/* <Header addTodo={todoActions.addTodo} /> */}
       <TodoList todos={filteredTodos} actions={todoActions} />
       <Footer
         filter={filter}
@@ -61,3 +61,5 @@ export const App = ({ history, location }: App.Props) => {
     </div>
   );
 };
+
+
