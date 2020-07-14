@@ -1,43 +1,44 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
+// import Button from '@material-ui/core/Button';
+// import Card from '@material-ui/core/Card';
+// import CardActions from '@material-ui/core/CardActions';
+// import CardContent from '@material-ui/core/CardContent';
+// import CardHeader from '@material-ui/core/CardHeader';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import StarIcon from '@material-ui/icons/StarBorder';
+// import Grid from '@material-ui/core/Grid';
+// import StarIcon from '@material-ui/icons/StarBorder';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './style';
 import Container from '@material-ui/core/Container';
 
 import { RouteComponentProps } from 'react-router';
 import { Header } from 'app/components/Header';
+// import { motion } from 'framer-motion';
 
-const tiers = [
-  {
-    title: 'Product Management',
-    price: '1',
-    description: ['10 users included', '2 GB of storage', 'Help center access', 'Email support'],
-    buttonText: 'Sign up for free',
-    buttonVariant: 'outlined'
-  },
-  {
-    title: 'Full Stack Developer',
-    subheader: 'Most popular',
-    price: '4',
-    description: ['20 users included', '10 GB of storage', 'Help center access', 'Priority email support'],
-    buttonText: 'Get started',
-    buttonVariant: 'contained'
-  },
-  {
-    title: 'Deep Learning',
-    price: '<1',
-    description: ['50 users included', '30 GB of storage', 'Help center access', 'Phone & email support'],
-    buttonText: 'Contact us',
-    buttonVariant: 'outlined'
-  }
-];
+// const tiers = [
+//   {
+//     title: 'Product Management',
+//     price: '1',
+//     description: ['10 users included', '2 GB of storage', 'Help center access', 'Email support'],
+//     buttonText: 'Sign up for free',
+//     buttonVariant: 'outlined'
+//   },
+//   {
+//     title: 'Full Stack Developer',
+//     subheader: 'Most popular',
+//     price: '4',
+//     description: ['20 users included', '10 GB of storage', 'Help center access', 'Priority email support'],
+//     buttonText: 'Get started',
+//     buttonVariant: 'contained'
+//   },
+//   {
+//     title: 'Deep Learning',
+//     price: '<1',
+//     description: ['50 users included', '30 GB of storage', 'Help center access', 'Phone & email support'],
+//     buttonText: 'Contact us',
+//     buttonVariant: 'outlined'
+//   }
+// ];
 
 export namespace App {
   export interface Props extends RouteComponentProps<void> {}
@@ -48,12 +49,15 @@ export const App = ({ history, location }: App.Props) => {
 
   return (
     <div>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <Header />
       {/* Hero unit */}
       <Container component="main" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="left" color="textPrimary" gutterBottom>
-          About Me
+          About
+        </Typography>
+        <Typography component="h1" variant="h2" align="left" color="textPrimary" gutterBottom>
+          Me
         </Typography>
         <Typography variant="h5" align="left" color="textSecondary" component="p">
           I'm an experienced software developer with experience in Product Management and building deep learning tools.
@@ -61,7 +65,7 @@ export const App = ({ history, location }: App.Props) => {
         </Typography>
       </Container>
       {/* End hero unit */}
-      <Container maxWidth="md" component="main">
+      {/* <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
@@ -101,7 +105,7 @@ export const App = ({ history, location }: App.Props) => {
             </Grid>
           ))}
         </Grid>
-      </Container>
+      </Container>*/}
     </div>
   );
 };
