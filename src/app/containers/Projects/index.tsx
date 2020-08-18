@@ -6,13 +6,13 @@ import { RouteComponentProps } from 'react-router';
 // import { useDispatch, useSelector } from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { useProjectActions } from 'app/actions';
+import { motion } from 'framer-motion';
 
 // import { useProjectActions, ProjectActions } from 'app/actions';
 import { RootState } from 'app/reducers';
 import { Header } from 'app/components/Header';
 import { ProjectItem } from 'app/components/ProjectItem';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
+import Grid from '@material-ui/core/Grid';
 
 export namespace App {
   export interface Props extends RouteComponentProps<void> {}
@@ -21,7 +21,7 @@ export namespace App {
 export const App = ({ history, location }: App.Props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  console.log(location);
+  console.log(history, location);
   const projectActions = useProjectActions(dispatch);
   const { loading, projects } = useSelector((state: RootState) => {
     return {
@@ -29,48 +29,38 @@ export const App = ({ history, location }: App.Props) => {
       projects: state.projects?.projects
     };
   });
+  console.log(projects);
   useEffect(() => {
     projectActions.fetchProjects();
   }, [projectActions.fetchProjects]);
+  //TODO: Move the header outside the component and have common header for projects and about me
   return (
-    <React.Fragment>
-      {/* <CssBaseline /> */}
-      <Header />
-      {/* End hero unit */}
-      <Container component="main" maxWidth={'lg'}>
+    <motion.div
+      style={{ height: '100vh' }}
+      initial="initial"
+      animate="enter"
+      exit="exit"
+      variants={{ exit: { transition: { staggerChildren: 0.1 } }, entry: { transition: { staggerChildren: 0.2 } } }}
+    >
+      <Header activeProject={undefined} />
+      <Container component="main" className={classes.content}>
         {loading ? (
           <CircularProgress />
         ) : (
-          // <Router history={history}>
-          //   <Route path={['projects/:_id', 'projects/']}>
-          <GridList cellHeight={360} className={classes.cardList} cols={3}>
+          <Grid container spacing={8}>
             {projects &&
               projects.map((project, index) => (
-                <GridListTile key={project._id} cols={index  % 4 == 0 ? 2 : 1}>
+                <Grid item key={project.projectId} xs={4}>
                   <ProjectItem
-                    key={project._id}
-                    isSelected={location.pathname.includes(project._id)}
+                    key={project.projectId}
                     history={history}
-                    {...project}
+                    project={project}
                   />
-                </GridListTile>
+                </Grid>
               ))}
-          </GridList>
-          // <ul className={classes.cardList}>
-          //   {projects &&
-          //     projects.map((project) => (
-          //       <ProjectItem
-          //         key={project._id}
-          //         isSelected={location.pathname.includes(project._id)}
-          //         history={history}
-          //         {...project}
-          //       />
-          //     ))}
-          // </ul>
-          // </Route>
-          // </Router>
+          </Grid>
         )}
       </Container>
-    </React.Fragment>
+    </motion.div>
   );
 };

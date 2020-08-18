@@ -1,22 +1,24 @@
 import * as React from 'react';
-import { memo, useRef } from 'react';
-import { motion, useMotionValue } from 'framer-motion';
+// import { memo, useRef } from 'react';
+import { motion } from 'framer-motion';
 // import { CardData } from "../types";
-import { Content } from './Content';
-import { Title } from './Title';
-import { Image } from './Image';
-import { openSpring, closeSpring } from './animation';
-import { useWheelScroll } from 'app/utils/use-wheel-scroll';
-import { useScrollConstraints } from 'app/utils/use-scroll-constraints';
-import { useInvertedBorderRadius } from 'app/utils/use-inverted-border-radius';
+// import { Content } from './Content';
+// import { Title } from './Title';
+// import { Image } from './Image';
+// import { openSpring, closeSpring } from './animation';
+// import { useWheelScroll } from 'app/utils/use-wheel-scroll';
+// import { useScrollConstraints } from 'app/utils/use-scroll-constraints';
+// import { useInvertedBorderRadius } from 'app/utils/use-inverted-border-radius';
 import { ProjectModel } from 'app/models';
-import { useStyles } from './style';
+// import { useStyles } from './style';
 import { Link } from 'react-router-dom';
-import { Box, Container } from '@material-ui/core';
+import { Card, CardContent, Typography, CardMedia, CardHeader, Avatar } from '@material-ui/core';
+// import { time } from 'console';
+// import { Link as RouterLink } from 'react-router-dom';
 
 export namespace ProjectItem {
-  export interface Props extends ProjectModel {
-    isSelected: boolean;
+  export interface Props {
+    project: ProjectModel;
     history: {
       push: (route: string) => void;
     };
@@ -25,67 +27,70 @@ export namespace ProjectItem {
 
 // Distance in pixels a user has to scroll a card down before we recognise
 // a swipe-to dismiss action.
-const dismissDistance = 150;
+// const dismissDistance = 150;
 
-export const ProjectItem = memo(
-  ({ isSelected, _id, title, image, startDate, endDate, content, history }: ProjectItem.Props) => {
-    const classes = useStyles();
-    const y = useMotionValue(0);
-    const zIndex = useMotionValue(isSelected ? 2 : 0);
+export const ProjectItem = ({ project, history }: ProjectItem.Props) => {
+  // const classes = useStyles();
+  const transition = { duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] };
 
-    // Maintain the visual border radius when we perform the layoutTransition by inverting its scaleX/Y
-    const inverted = useInvertedBorderRadius(20);
-
-    // We'll use the opened card element to calculate the scroll constraints
-    const cardRef = useRef(null);
-    const constraints = useScrollConstraints(cardRef, isSelected);
-
-    function checkSwipeToDismiss() {
-      y.get() > dismissDistance && history.push('/projects');
+  const thumbnailVariants = {
+    initial: { scale: 0.9, opacity: 0 },
+    enter: { scale: 1, opacity: 1, transition },
+    exit: {
+      scale: 0.5,
+      opacity: 0,
+      transition: { ...{ duration: 1.5 }, ...transition }
     }
+  };
 
-    function checkZIndex(latest: { [key: string]: React.ReactText }) {
-      if (isSelected) {
-        zIndex.set(2);
-      } else if (!isSelected && latest.scaleX < 1.01) {
-        zIndex.set(0);
-      }
-    }
+  const frameVariants = {
+    hover: { scale: 0.95 }
+  };
 
-    // When this card is selected, attach a wheel event listener
-    const containerRef = useRef(null);
-    useWheelScroll(containerRef, y, constraints, checkSwipeToDismiss, isSelected);
+  const imageVariants = {
+    hover: { scale: 1.1 }
+  };
 
-    return (
-      <Box ref={containerRef} className={classes.card}>
-        <motion.div
-          initial={false}
-          animate={{ opacity: isSelected ? 1 : 0 }}
-          transition={{ duration: 0.2 }}
-          style={{ pointerEvents: isSelected ? 'auto' : 'none' }}
-          className={classes.overlay}
-        >
-          <Link className={classes.overlayLink} to="/projects" />
-        </motion.div>
-        <Container className={isSelected ? classes.cardContentContainerOpen : classes.cardContentContainer} maxWidth={'lg'}>
-          <motion.div
-            ref={cardRef}
-            className={classes.cardContent}
-            style={{ ...inverted, zIndex, y }}
-            layoutTransition={isSelected ? openSpring : closeSpring}
-            drag={isSelected ? 'y' : false}
-            dragConstraints={constraints}
-            onDrag={checkSwipeToDismiss}
-            onUpdate={checkZIndex}
-          >
-            <Image imageUrl={image} isSelected={isSelected} pointOfInterest={80} backgroundColor={'#3e3e3e'} />
-            <Title title={title} startDate={startDate} endDate={endDate} isSelected={isSelected} />
-            <Content content={content} />
-          </motion.div>
-        </Container>
-        {!isSelected && <Link to={`/projects/${_id}`} className={classes.cardOpenLink} />}
-      </Box>
-    );
-  },
-  (prev, next) => prev.isSelected === next.isSelected
-);
+  return (
+    <Link to={`/details/${project.projectId}`} style={{ textDecoration: 'none' }}>
+      <motion.div variants={thumbnailVariants} style={{ height: 180 }}>
+        <Card elevation={2}>
+          <CardHeader
+            avatar={<Avatar alt={project.company.companyName} src={project.company.companyLogo} />}
+            title={project.company.companyName}
+            subheader={project.company.companyLink}
+          />
+          {/* <CardActionArea> */}
+          <CardMedia>
+            <motion.div className="frame" whileHover="hover" variants={frameVariants} transition={transition}>
+              <motion.img
+                src={project.projectCover}
+                style={{ objectFit: 'cover', height: '100%', width: '100%' }}
+                alt="The Barbican"
+                variants={imageVariants}
+                transition={transition}
+              />
+            </motion.div>
+          </CardMedia>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2" >
+              {project.projectTitle}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p" >
+              {project.projectContent}
+            </Typography>
+          </CardContent>
+          {/* </CardActionArea> */}
+          {/* <CardActions>
+        <Button size="small" color="primary">
+          Share
+        </Button>
+        <Button size="small" color="primary">
+          Learn More
+        </Button>
+      </CardActions> */}
+        </Card>
+      </motion.div>
+    </Link>
+  );
+};

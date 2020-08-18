@@ -1,9 +1,10 @@
 export interface CompanyModel {
-    id: string;
-    name: string;
-    startDate: string;
-    endDate: string;
-    link: string;
-    logoUrl: string;
+    companyId: string;
+    companyName: string;
+    companyDescription: string;
+    companytartDate: string;
+    companyEndDate: string;
+    companyLink: string;
+    companyLogo: string;
   }
   

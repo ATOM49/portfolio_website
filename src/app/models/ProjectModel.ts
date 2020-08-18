@@ -2,12 +2,12 @@
 import { CompanyModel } from './CompanyModel';
 
 export interface ProjectModel {
-  _id: string;
-  image: string;
-  title: string;
-  content: string;
-  startDate: string;
-  endDate: string;
-  primaryFunction: string;
-  associatedCompany: CompanyModel;
+  projectId: string;
+  projectCover: string;
+  projectTitle: string;
+  projectContent: string;
+  projectStartDate: string;
+  projectEndDate: string;
+  primaryRole: string;
+  company: CompanyModel
 }

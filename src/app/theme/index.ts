@@ -1,15 +1,14 @@
-import { palinoRegular } from './fonts';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 export const theme = createMuiTheme({
   typography: {
-    fontFamily: [palinoRegular.fontFamily, 'serif'].join(',')
+    fontFamily: ['"Helvetica Neue"'].join(',')
   },
-  spacing: 4,
+  spacing: 8,
   overrides: {
     MuiCssBaseline: {
       '@global': {
-        '@font-face': [palinoRegular],
+        '@font-face': ["Helvetica Neue"],
       }
     }
   }

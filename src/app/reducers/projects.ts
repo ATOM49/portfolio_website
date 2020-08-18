@@ -20,6 +20,16 @@ export const projectsReducer: Reducer<RootState.ProjectState | undefined, FluxSt
       return {
         ...state
       };
+    case ProjectActions.Type.FETCH_PROJECT_DETAILS + '_FULFILLED':
+      return {
+        ...state,
+        loading: false,
+        activeProject: action.payload.data
+      };
+    case ProjectActions.Type.FETCH_PROJECT_DETAILS + '_REJECTED':
+      return {
+        ...state
+      };
     default:
       return state;
   }
