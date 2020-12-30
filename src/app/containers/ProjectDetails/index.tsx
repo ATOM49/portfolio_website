@@ -68,7 +68,7 @@ interface ChipData {
 }
 
 export namespace App {
-  export interface Props extends RouteComponentProps<void> {}
+  export interface Props extends RouteComponentProps<void> { }
 }
 
 export const App = ({ history, location, match }: App.Props) => {
@@ -104,61 +104,61 @@ export const App = ({ history, location, match }: App.Props) => {
         {loading ? (
           <CircularProgress />
         ) : (
-          <Container maxWidth={'lg'}>
-            <motion.img
-              initial={{ y: '-50%', opacity: 0 }}
-              style={{ width: '100%', height: 360, objectFit: 'cover' }}
-              variants={imageVariants}
-              src={activeProject?.projectCover}
-              alt="The Barbican"
-            />
-            <Grid container spacing={3}>
-              <Grid item xs={9}>
-                <motion.div variants={titleVariants}>
-                  <Typography variant="h2">{activeProject?.projectTitle}</Typography>
-                </motion.div>
-                <motion.div variants={contentVariantss}>
-                  <Typography variant="body1">{activeProject?.projectContent}</Typography>
-                </motion.div>
+            <Container maxWidth={'lg'}>
+              <motion.img
+                initial={{ y: '-50%', opacity: 0 }}
+                style={{ width: '100%', height: 360, objectFit: 'cover' }}
+                variants={imageVariants}
+                src={activeProject?.imageUrl}
+                alt="The Barbican"
+              />
+              <Grid container spacing={3}>
+                <Grid item xs={9}>
+                  <motion.div variants={titleVariants}>
+                    <Typography variant="h2">{activeProject?.title}</Typography>
+                  </motion.div>
+                  <motion.div variants={contentVariantss}>
+                    <Typography variant="body1">{activeProject?.content}</Typography>
+                  </motion.div>
+                </Grid>
+                <Grid item xs={3} spacing={8}>
+                  <motion.div variants={paperVariants}>
+                    <Paper>
+                      <Card>
+                        <CardHeader
+                          avatar={
+                            <Avatar alt={activeProject?.company.name} src={activeProject?.company.logoUrl} />
+                          }
+                          title={activeProject?.company.name}
+                          subheader={activeProject?.company.description}
+                        />
+                      </Card>
+                    </Paper>
+                  </motion.div>
+                  <motion.div variants={paperVariants}>
+                    <Paper className={classes.chips}>
+                      {chipData.map((data) => {
+                        // let icon;
+                        // if (data.label === 'React') {
+                        //   icon = <TagFacesIcon />;
+                        // }
+                        return (
+                          <li key={data.key}>
+                            <Chip
+                              // icon={icon}
+                              label={data.label}
+                              // onDelete={data.label === 'React' ? undefined : handleDelete(data)}
+                              className={classes.chip}
+                            />
+                          </li>
+                        );
+                      })}
+                    </Paper>
+                  </motion.div>
+                </Grid>
               </Grid>
-              <Grid item xs={3} spacing={8}>
-                <motion.div variants={paperVariants}>
-                  <Paper>
-                    <Card>
-                      <CardHeader
-                        avatar={
-                          <Avatar alt={activeProject?.company.companyName} src={activeProject?.company.companyLogo} />
-                        }
-                        title={activeProject?.company.companyName}
-                        subheader={activeProject?.company.companyDescription}
-                      />
-                    </Card>
-                  </Paper>
-                </motion.div>
-                <motion.div variants={paperVariants}>
-                  <Paper className={classes.chips}>
-                    {chipData.map((data) => {
-                      // let icon;
-                      // if (data.label === 'React') {
-                      //   icon = <TagFacesIcon />;
-                      // }
-                      return (
-                        <li key={data.key}>
-                          <Chip
-                            // icon={icon}
-                            label={data.label}
-                            // onDelete={data.label === 'React' ? undefined : handleDelete(data)}
-                            className={classes.chip}
-                          />
-                        </li>
-                      );
-                    })}
-                  </Paper>
-                </motion.div>
-              </Grid>
-            </Grid>
-          </Container>
-        )}
+            </Container>
+          )}
       </Container>
     </motion.div>
   );

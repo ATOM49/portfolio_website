@@ -19,8 +19,8 @@ export function MiddleReveal() {
             size={'100%'}
             background={''}
             style={{
-              fontFamily: 'Palino',
-              fontWeight: 'bold',
+              // fontFamily: 'Palino',
+              // fontWeight: 'bold',
               letterSpacing: '-0.04em',
               fontSize: 46
               //   color: '#FFF'
@@ -48,8 +48,8 @@ export function MiddleReveal() {
             size={'100%'}
             background={''}
             style={{
-              fontFamily: 'Palino',
-              fontWeight: 'bold',
+              // fontFamily: 'Palino',
+              // fontWeight: 'bold',
               letterSpacing: '-0.04em',
               fontSize: 46
               //   color: '#FFF'

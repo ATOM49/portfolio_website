@@ -1,1 +1,3 @@
-export * from './ProjectModel';
+export * from './Project';
+export * from './Company';
+export * from './Skill';

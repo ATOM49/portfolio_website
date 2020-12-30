@@ -1,9 +1,8 @@
 {
-  "name": "react-hooks-redux-typescript-boilerplate",
+  "name": "portfolio-website",
   "version": "1.1.1",
   "private": true,
-  "description": "A frontend boilerplate with React hooks, Redux and Typescript",
-  "homepage": "https://rokoroku.github.io/react-redux-typescript-boilerplate",
+  "description": "Abhilash Mirji - Portfolio",
   "keywords": [
     "react",
     "hooks",
@@ -17,7 +16,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --mode development --hot --progress --color --port 3000 --open",
+    "start": "webpack-dev-server --mode development --hot --progress --color --port 3001 --open",
     "build": "webpack -p --progress --colors"
   },
   "license": "MIT",

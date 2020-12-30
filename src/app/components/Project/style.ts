@@ -3,44 +3,62 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
   card: {
     position: 'relative',
-    // padding: 25,
-    height: 420,
-    flex: '0 0 40%',
-    margin: 0
+    padding: '25px',
+    height: '420px',
+    flex: '0 0 43%',
+    maxWidth: 'calc(50% - 50px)',
+    listStyle: 'none',
+    margin: 0,
   },
   cardContentContainer: {
     width: '100%',
     height: '100%',
     position: 'relative',
     display: 'block',
-    pointer: 'none',
-    padding: 0
+    pointerEvents: 'none',
   },
   cardContentContainerOpen: {
+    width: '100%',
+    height: '100%',
+    display: 'block',
+    pointerEvents: 'none',
     top: 0,
     left: 0,
     right: 0,
     position: 'fixed',
     zIndex: 1,
     overflow: 'hidden',
-    padding: '72px 0',
+    padding: '40px 0',
   },
   cardContent: {
     pointerEvents: 'auto',
     position: 'relative',
     borderRadius: 20,
-    background: '#3e3e3e',
+    background: '#1c1c1e',
     overflow: 'hidden',
-    margin: '0 auto'
+    margin: '0 auto',
+    width: '100%',
+    height: '100%',  
   },
   cardContentOpen: {
     height: 'auto',
+    maxWidth: 700, 
+    pointerEvents: 'auto',
     position: 'relative',
     borderRadius: 20,
-    background: '#3e3e3e',
+    background: '#1c1c1e',
     overflow: 'hidden',
     margin: '0 auto',
-    pointerEvents: 'none'
+    width: '100%',
+  },
+  contentContainer: {
+    padding: '460px 35px 35px 35px',
+    maxWidth: 700,
+    width: '90vw',
+  },
+  contentParagraph:{
+    color: '#9d9ca1',
+    fontSize: 20,
   },
   cardOpenLink: {
     position: 'absolute',
@@ -71,7 +89,11 @@ export const useStyles = makeStyles(() => ({
     left: 15,
     maxWidth: '50%'
   },
-  titleContainerOpen:{
+  title:{
+    color: '#fff',
+    margin: '8px 0',
+  },
+  titleContainerOpen: {
     position: 'absolute',
     zIndex: 1,
     top: 30,
@@ -94,21 +116,20 @@ export const useStyles = makeStyles(() => ({
     background: 'rgba(0, 0, 0, 0.08)',
     willChange: 'opacity',
     top: 0,
-    left:0,
+    bottom:0,
     width: '100%',
-  },
+    left: '50%',
+    transform: 'translateX(-50%)'
+    },
   overlayLink: {
+    zIndex: 1,
     position: 'fixed',
     background: 'rgba(0, 0, 0, 0.08)',
     willChange: 'opacity',
     top: 0,
-    left:0,
-    height: '100vh',
+    bottom:0,
+    left: '50%',
     width: '100vw',
-  },
-  contentContainer: {
-    padding: '460px 35px 35px 35px',
-    // maxWidth: 700,
-    // width: '90vw'
+    transform: 'translateX(-50%)',
   }
 }));

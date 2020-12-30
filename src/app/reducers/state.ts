@@ -1,4 +1,4 @@
-import { ProjectModel } from 'app/models';
+import { Project } from 'app/models';
 
 export interface RootState {
   projects?: RootState.ProjectState;
@@ -6,5 +6,5 @@ export interface RootState {
 }
 
 export namespace RootState {
-  export type ProjectState = { projects: ProjectModel[]; loading: boolean; activeProject?: ProjectModel };
+  export type ProjectState = { projects: Project[]; loading: boolean; activeProject?: Project };
 }

@@ -12,11 +12,11 @@ const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <ThemeProvider theme={theme}>
-          <App />
-      </ThemeProvider>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <App />
+      </Router>
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 );

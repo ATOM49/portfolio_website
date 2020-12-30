@@ -14,11 +14,11 @@ import Container from '@material-ui/core/Container';
 import { RouteComponentProps } from 'react-router';
 import { Header, MiddleReveal } from 'app/components';
 
-export namespace App {
-  export interface Props extends RouteComponentProps<void> {}
+export namespace Home {
+  export interface Props extends RouteComponentProps<void> { }
 }
 
-export const App = ({ history, location }: App.Props) => {
+export const Home = ({ history, location }: Home.Props) => {
   const classes = useStyles();
 
   return (
